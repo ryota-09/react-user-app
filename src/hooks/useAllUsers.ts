@@ -5,7 +5,7 @@ import { useMessage } from "./useMessage";
 
 export const useAllUsers = () => {
   const [loading, setLoading] = useState(false);
-  const [userList, setUserList] = useState<Array<User>>();
+  const [userList, setUserList] = useState<Array<User>>([]);
   const { showMessage } = useMessage();
 
   const getUsers = useCallback(async (): Promise<void> => {
