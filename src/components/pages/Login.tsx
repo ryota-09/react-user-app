@@ -4,10 +4,10 @@ import {
   Heading,
   Divider,
   Input,
-  Button,
   Stack,
 } from "@chakra-ui/react";
 import { FC, memo } from "react";
+import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 //memoは全体を囲う。
 export const Login: FC = memo(() => {
@@ -22,7 +22,7 @@ export const Login: FC = memo(() => {
         {/* stackは囲った中を等間隔に配置してくれる。 */}
         <Stack spacing={6} py={4} px={10} >
           <Input placeholder="ユーザーID" />
-          <Button bg="teal.400" color="white" _hover={{ opacity: 0.8 }}>ログイン</Button>
+          <PrimaryButton>ログイン</PrimaryButton>
         </Stack>
       </Box>
     </Flex>
