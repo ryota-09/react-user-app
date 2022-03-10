@@ -34,7 +34,13 @@ export const Header: FC = memo(() => {
         padding={{ base: 3, md: 5 }}
       >
         {/* HTMLのh1,h2みたいな表現ができるコンポーネント。md はchakuraUI特有の画面サイズ管理単位。 プロパティのmdはレスポンシブのブレイクポイント。*/}
-        <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer" }} onClick={onClickHome} >
+        <Flex
+          align="center"
+          as="a"
+          mr={8}
+          _hover={{ cursor: "pointer" }}
+          onClick={onClickHome}
+        >
           <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
             ユーザー管理アプリ
           </Heading>
@@ -51,11 +57,17 @@ export const Header: FC = memo(() => {
             <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
           </Box>
 
-          <Link onClick={onClickSetting} >設定</Link>
+          <Link onClick={onClickSetting}>設定</Link>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
-      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickSetting={onClickSetting} />
+      <MenuDrawer
+        onClose={onClose}
+        isOpen={isOpen}
+        onClickHome={onClickHome}
+        onClickUserManagement={onClickUserManagement}
+        onClickSetting={onClickSetting}
+      />
     </>
   );
 });
