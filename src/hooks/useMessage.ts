@@ -3,6 +3,7 @@ import { useCallback } from "react";
 
 type Props = {
   title: string;
+  // 選択肢の時はこんな形でかく。
   status: "info" | "warning" | "success" | "error";
 };
 

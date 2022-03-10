@@ -2,9 +2,11 @@ import axios from "axios";
 import { useCallback, useState } from "react"
 import { useHistory } from "react-router-dom";
 import { User } from "../types/api/user";
+import { useMessage } from "./useMessage";
 
 export const useAuth = () => {
-  const history = useHistory()
+  const history = useHistory();
+  const { showMessage } = useMessage();
 
   const [loading, setLoading] = useState(false);
   
@@ -13,16 +15,16 @@ export const useAuth = () => {
 
       const response = await axios.get<User>(`https://jsonplaceholder.typicode.com/users/${id}`);
       if(response.data){
+        showMessage({title: "ログインしました。", status: "success"});
         history.push("/home");
       } else {
-        alert("ユーザーが見つかりません。");
+        showMessage({title: "ユーザーが見つかりません。", status: "error"});
       }
-      
     } catch(error){
-      alert("ログインできません。")
+      showMessage({title: "ログインできません。", status: "error"});
     } finally {
       setLoading(false);
     }
-  },[history]);
+  },[history,showMessage]);
   return {login, loading}
 }
