@@ -6,11 +6,15 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { FC, memo } from "react";
+import { ChangeEvent, FC, memo, useState } from "react";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 //memoは全体を囲う。
 export const Login: FC = memo(() => {
+  const [userId, setUserId] = useState("");
+  const onChangeUserId = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserId(event.target.value);
+  }
   return (
     <Flex align="center" justify="center" height="100vh">
       <Box bg="white" w="sm" p={4} borderRadius="md" shadow="md">
@@ -21,7 +25,7 @@ export const Login: FC = memo(() => {
         <Divider my={4} />
         {/* stackは囲った中を等間隔に配置してくれる。 */}
         <Stack spacing={6} py={4} px={10} >
-          <Input placeholder="ユーザーID" />
+          <Input placeholder="ユーザーID" value={userId} onChange={onChangeUserId}/>
           <PrimaryButton>ログイン</PrimaryButton>
         </Stack>
       </Box>
