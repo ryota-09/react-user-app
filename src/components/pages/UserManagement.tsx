@@ -11,19 +11,26 @@ import {
 import { UserCard } from "../../components/pages/organisms/user/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { UserDetailModal } from "./organisms/user/UserDetailModal";
+import { useSelectUser } from "../../hooks/useSelectUser";
+
 //memoは全体を囲う。
 export const UserManagement: FC = memo(() => {
   const { getUsers, loading, userList } = useAllUsers();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onSelectUser, selectedUser } = useSelectUser();
+
+  
 
   //画面表示時の処理(created(){})
   useEffect(() => {
     getUsers();
   }, []);
 
-  const onClickUser = useCallback(() => {
-    onOpen();
-  }, []);
+  const onClickUser = useCallback((id: number) => {
+    console.log(id);
+    onSelectUser({ id: id, userList: userList , onOpen: onOpen});
+    //ここは依存配列に変数を入れないと初期の状況から変化しなくなってしまう。
+  }, [userList, onOpen, onSelectUser]);
 
   return (
     <>
@@ -36,6 +43,7 @@ export const UserManagement: FC = memo(() => {
           {userList.map((user) => (
             <WrapItem key={user.id} mx="auto">
               <UserCard
+                id={user.id}
                 imageUrl="https://source.unsplash.com/random"
                 userName={user.username}
                 fullName={user.name}
@@ -45,7 +53,7 @@ export const UserManagement: FC = memo(() => {
           ))}
         </Wrap>
       )}
-      <UserDetailModal isOpen={isOpen} onClose={onClose} />
+      <UserDetailModal user={selectedUser} isOpen={isOpen} onClose={onClose} />
     </>
   );
 });
