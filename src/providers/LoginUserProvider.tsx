@@ -1,13 +1,13 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { User } from "../types/api/user";
 
-type LoginUserContextType = {
+export type LoginUserContextType = {
   loginUser: User | null;
   //contextの更新関数の書き方。
   setLoginUser: Dispatch<SetStateAction<User | null>>;
 };
 //asを使って強制的にこの型を指定している。
-const LoginUserContext = createContext<LoginUserContextType>(
+export const LoginUserContext = createContext<LoginUserContextType>(
   {} as LoginUserContextType
 );
 //直接typeを作っているイメージ。
