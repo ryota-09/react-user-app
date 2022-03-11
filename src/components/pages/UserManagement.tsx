@@ -2,17 +2,7 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import {
   Center,
-  FormControl,
-  FormLabel,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Spinner,
-  Stack,
   useDisclosure,
   Wrap,
   WrapItem,
@@ -20,6 +10,7 @@ import {
 
 import { UserCard } from "../../components/pages/organisms/user/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
+import { UserDetailModal } from "./organisms/user/UserDetailModal";
 //memoは全体を囲う。
 export const UserManagement: FC = memo(() => {
   const { getUsers, loading, userList } = useAllUsers();
@@ -54,38 +45,7 @@ export const UserManagement: FC = memo(() => {
           ))}
         </Wrap>
       )}
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        autoFocus={false}
-        motionPreset="slideInBottom"
-      >
-        <ModalOverlay />
-        <ModalContent pb={6}>
-          <ModalHeader>ユーザー詳細</ModalHeader>
-          <ModalBody mx={4}>
-            <Stack spacing={4}>
-              <FormControl>
-                <FormLabel>名前</FormLabel>
-                <Input value="鈴木" isReadOnly />
-              </FormControl>
-              <FormControl>
-                <FormLabel>フルネーム</FormLabel>
-                <Input value="鈴木" isReadOnly />
-              </FormControl>
-              <FormControl>
-                <FormLabel>mail</FormLabel>
-                <Input value="鈴木" isReadOnly />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Tel</FormLabel>
-                <Input value="鈴木" isReadOnly />
-              </FormControl>
-            </Stack>
-          </ModalBody>
-          <ModalCloseButton />
-        </ModalContent>
-      </Modal>
+      <UserDetailModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 });
